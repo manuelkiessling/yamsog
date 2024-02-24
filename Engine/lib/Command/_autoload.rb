@@ -1,0 +1,6 @@
+require "Command/abstract.rb"
+require "Command/addplayer.rb"
+require "Command/addunit.rb"
+require "Command/attack.rb"
+require "Command/cancel.rb"
+require "Command/goto.rb"

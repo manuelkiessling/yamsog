@@ -1,0 +1,7 @@
+[{"col":4,"command":"goto","row":2,"commander":"player1","receiver":"unit3"},{"col":5,"command":"goto","row":5,"commander":"player2","receiver":"unit1"},{"col":5,"command":"attack","row":5,"commander":"player1","receiver":"unit3"},{"command":"cancel","commander":"player1","receiver":"unit3"}]
+
+[{"col":4,"command":"goto","row":2,"commander":"player1","receiver":"unit3"}]
+
+[{"commander":"player1","command":"goto","col":2,"row":2,"unit_type":"soldier"}]
+
+attr_accessor :unit_type, :row, :col

@@ -1,0 +1,6 @@
+require "Terrain/abstract.rb"
+require "Terrain/forest.rb"
+require "Terrain/grass.rb"
+require "Terrain/mountain.rb"
+require "Terrain/plain.rb"
+require "Terrain/water.rb"

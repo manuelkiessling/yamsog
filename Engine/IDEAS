@@ -1,0 +1,8 @@
+- 2 Spieler spielen umsonst, will ein Dritter, Vierter etc. mitspielen, muss er zahlen
+- Ein weiterer Spieler kann immer nur dann dazustoßen, wenn die Anzahl seiner Units die Gesamtzahl der Units im laufenden Spiel nicht überschreitet
+
+- Engine und Communication Server sind Closed Source, Client(s) Open Source
+- Plattform benutzt nur ausgewählte Features des Open Source Clients, User bekommen aber die Möglichkeit auf Wunsch die Community-Version zu spielen
+
+Clients und Animation:
+- Eigener Spieler sieht seine Units in Bewegung (= Animation oder nur Symbol "in Bewegung nach <Richtung>"). Gegner sieht die gegnerischen Units nur dort, wo sie gerade sind.

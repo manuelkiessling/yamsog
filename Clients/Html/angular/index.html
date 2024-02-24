@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:ng="http://angularjs.org">
+	<head>
+		<script type="text/javascript"
+		src="angular-debug.js" ng:autobind></script>
+
+		<style>
+			body {
+				margin-top: 100px;
+			}
+													
+			#fields {
+				position: fixed;
+				right: 0px;
+				top: 0px;
+				z-index: 9;
+			}
+			
+			.row {
+			}
+
+			
+			.field {
+				display:inline-block;
+			}
+			
+			.terrain {
+				background-repeat:no-repeat;
+				display:inline-block;
+				height: 100px;
+				width: 100px;
+				border: 1px dotted yellow;
+			}
+	
+			.tg {
+				background-color: green;
+			}
+			
+			.tp {
+				background-color: gray;
+			}
+			
+			.tw {
+				background-color: blue;
+			}
+						
+			.unit {
+				background-repeat:no-repeat;
+				display:inline-block;
+				height: 20px;
+				width: 20px;
+			}
+			
+			.usoldier {
+				background-color: none;
+				border: 1px solid white;
+			}
+			
+			.button {
+			}
+			
+			.clickarea {
+				z-index: 11;
+				background-color: red;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<script>
+
+		angular.service('Yamsog', function($resource) {
+
+			this.State = $resource(
+				'http://0.0.0.0:port/state/get',
+				{ callback:	'JSON_CALLBACK', port: ':3001' },
+				{ get:		{method:'JSON'}}
+			);
+			
+			this.AddUnit = $resource(
+				'http://0.0.0.0:port/command/addunit?player_id=:player_id&unit_type=:unit_type&row=:row&col=:col',
+				{ port: ':3001', player_id: '0', unit_type: 'soldier' },
+				{ order:		{method:'GET'}}
+			);
+			
+		}, {inject:['$resource']});
+
+		function MapController() {
+			this.state = { };
+			this.newstate = { };
+			this.$watch('State', this.stateChanged);
+		}
+		MapController.prototype = {
+			fetch: function() {
+				this.newstate = this.State.get();
+			},
+			
+			stateChanged: function() {
+				console.log(this.State);
+				console.log(this.newstate);
+				if (this.newstate.map) {
+					this.state = this.newstate;
+					document.getElementById('maploader').click();
+				}
+			},
+			
+			addUnit: function(row, col) {
+				this.AddUnit.order({row: row, col: col});
+			},
+
+		};
+
+		</script>
+		
+		<div ng:controller="MapController">
+			<button id="maploader" class="button" ng:click="fetch()">Load map</button>
+			<hr/>
+			<div id="fields">
+				<div class="row" ng:repeat="row in state.map.terrain">
+					{{$rowindex=$index}}
+					<div ng:repeat="terrain in row" class="field">
+						{{$colindex=$index}}
+						<div class="clickarea" ng:click="addUnit($rowindex, $colindex)">
+							<div class="terrain t{{terrain}}">
+								<div class="unit u{{state.map.units[$rowindex][$colindex].type}}">
+								</div>
+							</div>
+						</div>
+					</div>
+					<br />
+				</div>
+			</div>
+		</div>
+		
+		<script>
+			document.getElementById('maploader').click();
+		</script>
+
+	</body>
+</head>

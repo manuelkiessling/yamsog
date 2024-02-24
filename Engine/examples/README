@@ -1,0 +1,12 @@
+- start_localfile_server.sh
+- Yamsog_Server an 3001 starten
+
+- http://0.0.0.0:3001/state/get
+- http://0.0.0.0:3001/command/addplayer?player_name=Manuel
+- http://0.0.0.0:3001/command/addplayer?player_name=Melinda
+- http://0.0.0.0:3001/command/addunit?player_id=0&unit_type=soldier&row=4&col=4
+
+- MAMP starten
+-> http://localhost:8888/yamsog/angular/
+
+usw...
